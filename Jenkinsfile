@@ -1,8 +1,6 @@
 pipeline {
     agent any
-    triggers {
-        githubPush()
-    }
+
     stages {
         stage('Git') {
             steps {
@@ -26,6 +24,4 @@ pipeline {
         }
     }
 }
-
-
 
