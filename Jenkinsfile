@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "majd04/app"            // ← mets le nom de ton image Docker
+        DOCKER_IMAGE = "majd04bougatef/app"            // ← mets le nom de ton image Docker
         DOCKER_TAG   = "latest"
     }
 
@@ -36,7 +36,7 @@ pipeline {
 
         stage('Docker Login') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', 
+                withCredentials([usernamePassword(credentialsId: 'token-docker-hub', 
                                                  usernameVariable: 'DOCKER_USER', 
                                                  passwordVariable: 'DOCKER_PASS')]) {
                     sh """
