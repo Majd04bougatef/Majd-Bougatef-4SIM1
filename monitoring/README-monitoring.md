@@ -26,10 +26,11 @@ Access the Spring Actuator metrics endpoint (screenshot requirement):
 
 ```bash
 # from local host when NodePort exposed on 30080
-curl http://<node-ip>:30080/actuator/prometheus
+# note: the application uses context-path `/student` so actuator endpoint is `/student/actuator/prometheus`
+curl http://<node-ip>:30080/student/actuator/prometheus
 # or using minikube
 minikube service spring-service -n devops --url
-# then curl <url>/actuator/prometheus
+# then curl <url>/student/actuator/prometheus
 ```
 
 Prometheus UI (screenshot requirement):
