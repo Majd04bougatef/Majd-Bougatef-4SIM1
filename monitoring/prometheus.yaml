@@ -16,6 +16,10 @@ data:
         metrics_path: '/student/actuator/prometheus'
         static_configs:
           - targets: ['spring-service:8080']
+        # Basic auth to access actuator (temporary - consider using a Secret)
+        basic_auth:
+          username: 'user'
+          password: '78bbaa57-974b-44ba-8b08-8c2867642393'
 
 ---
 # -------------------
