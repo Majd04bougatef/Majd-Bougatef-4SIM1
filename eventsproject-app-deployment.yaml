@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eventsproject-app
+  namespace: devops
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: eventsproject-app
+  template:
+    metadata:
+      labels:
+        app: eventsproject-app
+    spec:
+      containers:
+        - name: eventsproject-app
+          image: bensalahons/events-project:3.0.0
+          ports:
+            - containerPort: 8089
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:mysql://mysql-service:3306/eventsProjectDevOps?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+            - name: SPRING_DATASOURCE_USERNAME
+              value: root
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: ""
+            - name: SPRING_DATASOURCE_DRIVER_CLASS_NAME
+              value: com.mysql.cj.jdbc.Driver
+            - name: SERVER_PORT
+              value: "8089"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: eventsproject-service
+  namespace: devops
+spec:
+  selector:
+    app: eventsproject-app
+  ports:
+    - protocol: TCP
+      port: 8089
+      targetPort: 8089
+  type: NodePort
